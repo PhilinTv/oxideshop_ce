@@ -1356,7 +1356,8 @@ class Order extends \OxidEsales\Eshop\Core\Model\BaseModel
      */
     public function recalculateOrder($aNewArticles = [])
     {
-        \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->startTransaction();
+        // Remove transaction from recalculateOrder for testing reasons
+        // \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->startTransaction();
         try {
             $oBasket = $this->_getOrderBasket();
 
@@ -1374,12 +1375,15 @@ class Order extends \OxidEsales\Eshop\Core\Model\BaseModel
 
             //if finalizing order failed, rollback transaction
             if ($iRet !== 1) {
-                \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->rollbackTransaction();
+                // Remove transaction from recalculateOrder for testing reasons
+                // \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->rollbackTransaction();
             } else {
-                \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->commitTransaction();
+                // Remove transaction from recalculateOrder for testing reasons
+                // \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->commitTransaction();
             }
         } catch (Exception $exception) {
-            \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->rollbackTransaction();
+            // Remove transaction from recalculateOrder for testing reasons
+            // \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->rollbackTransaction();
 
             throw $exception;
         }
