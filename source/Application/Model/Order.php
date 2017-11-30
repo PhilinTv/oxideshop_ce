@@ -464,7 +464,8 @@ class Order extends \OxidEsales\Eshop\Core\Model\BaseModel
      */
     public function finalizeOrder(\OxidEsales\Eshop\Application\Model\Basket $oBasket, $oUser, $blRecalculatingOrder = false)
     {
-        \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->startTransaction();
+        // Remove transaction from finalizeOrder for testing reasons
+        // \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->startTransaction();
         try {
             // check if this order is already stored
             $sGetChallenge = \OxidEsales\Eshop\Core\Registry::getSession()->getVariable('sess_challenge');
@@ -556,9 +557,11 @@ class Order extends \OxidEsales\Eshop\Core\Model\BaseModel
                 $iRet = self::ORDER_STATE_OK;
             }
 
-            \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->commitTransaction();
+            // Remove transaction from finalizeOrder for testing reasons
+            // \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->commitTransaction();
         } catch (Exception $exception) {
-            \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->rollbackTransaction();
+            // Remove transaction from finalizeOrder for testing reasons
+            // \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->rollbackTransaction();
 
             throw $exception;
         }
