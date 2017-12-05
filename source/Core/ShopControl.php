@@ -463,8 +463,9 @@ class ShopControl extends \OxidEsales\Eshop\Core\Base
 
             if ($this->_isDebugMode()) {
                 \OxidEsales\Eshop\Core\Registry::getUtilsView()->addErrorToDisplay($ex);
+            } else {
+                $ex->debugOut();
             }
-            $ex->debugOut();
         }
 
         // Output processing. This is useful for modules. As sometimes you may want to process output manually.
